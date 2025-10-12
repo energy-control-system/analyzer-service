@@ -30,15 +30,13 @@ async def process_image(file: UploadFile = File(...)):
         is_blurred, blur_score, quality_score, has_error = inspect_photo_quality(img)
 
         return JSONResponse({
-            "is_blurred": bool(is_blurred),
-            "blur_score": blur_score,
-            "quality_score": quality_score,
-            "has_error": bool(has_error),
-            "filename": file.filename,
-            "dimensions": f"{width}x{height}",
-            "channels": channels,
-            "message": "Изображение успешно обработано",
-            "processed": "grayscale conversion done"
+            "IsBlurred": bool(is_blurred),
+            "BlurScore": blur_score,
+            "QualityScore": quality_score,
+            "HasError": bool(has_error),
+            "Filename": file.filename,
+            "Dimensions": f"{width}x{height}",
+            "Channels": channels
         })
 
     except Exception as e:
