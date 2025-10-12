@@ -27,10 +27,10 @@ async def process_image(file: UploadFile = File(...)):
 
         gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-        is_blured, blur_score, quality_score, has_error = inspect_photo_quality(img)
+        is_blurred, blur_score, quality_score, has_error = inspect_photo_quality(img)
 
         return JSONResponse({
-            "is_blured": bool(is_blured),
+            "is_blurred": bool(is_blurred),
             "blur_score": blur_score,
             "quality_score": quality_score,
             "has_error": bool(has_error),
