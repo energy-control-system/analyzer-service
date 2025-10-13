@@ -11,7 +11,8 @@ app = FastAPI()
 @app.post("/process-image")
 async def process_image(file: UploadFile = File(...)):
     if not file.content_type.startswith('image/'):
-        raise HTTPException(status_code=400, detail="Файл должен быть изображением")
+        raise HTTPException(status_code=400,
+                            detail=f"Файл должен быть изображением. Content-Type = {file.content_type}")
 
     try:
         contents = await file.read()
