@@ -11,6 +11,7 @@ app = FastAPI()
 @app.post("/process-image")
 async def process_image(file: UploadFile = File(...)):
     if not file.content_type.startswith('image/'):
+        print(f"Файл должен быть изображением. Content-Type = {file.content_type}")
         raise HTTPException(status_code=400,
                             detail=f"Файл должен быть изображением. Content-Type = {file.content_type}")
 
@@ -22,6 +23,7 @@ async def process_image(file: UploadFile = File(...)):
         img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
 
         if img is None:
+            print("Не удалось декодировать изображение")
             raise HTTPException(status_code=400, detail="Не удалось декодировать изображение")
 
         height, width, channels = img.shape
@@ -41,4 +43,5 @@ async def process_image(file: UploadFile = File(...)):
         })
 
     except Exception as e:
+        print(e)
         raise HTTPException(status_code=500, detail=str(e))
